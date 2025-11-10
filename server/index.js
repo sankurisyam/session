@@ -59,7 +59,9 @@ const upload = multer({ storage });
 app.post("/api/sessions", upload.single("video"), async (req, res) => {
   try {
     const unique_id = uuidv4();
-    const userurl = `http://localhost:5173/session/${unique_id}`;
+    // Use CLIENT_URL env var (set on Render) or default to localhost for local dev
+    const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+    const userurl = `${clientUrl}/session/${unique_id}`;
     const videoPath = req.file ? `/uploads/${req.file.filename}` : null;
     const newSession = new LiveSession({
       type: "admin",
