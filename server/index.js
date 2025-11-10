@@ -5,8 +5,12 @@ import multer from "multer";
 import fs from 'fs';
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 import LiveSession from "./models/LiveSession.js";
 import { v4 as uuidv4 } from "uuid";
+
+// Load environment variables from .env file
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
