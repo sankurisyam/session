@@ -31,7 +31,9 @@ if (!fs.existsSync(uploadsDir)) {
 // Note: useNewUrlParser/useUnifiedTopology options are no longer necessary with modern drivers.
 async function start() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/live_sessions');
+    const mongoUrl = process.env.MONGODB_URI || process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/live_sessions';
+    console.log('Connecting to MongoDB at', mongoUrl);
+    await mongoose.connect(mongoUrl);
     console.log('MongoDB connected.');
 
     // start HTTP server after DB connection
@@ -39,7 +41,7 @@ async function start() {
   } catch (err) {
     console.error('MongoDB connection error:', err.message || err);
     // give some info to help debugging
-    console.error('Make sure MongoDB is running and reachable at mongodb://127.0.0.1:27017');
+    console.error('Make sure MongoDB is running and reachable at the URL above (or set MONGODB_URI / MONGO_URL).');
     process.exit(1);
   }
 }
