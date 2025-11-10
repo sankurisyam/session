@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import VideoPlayer from '../components/VideoPlayer';
 import '../App.css';
 
-const API_BASE = 'http://localhost:5000';
+const API_BASE = 'https://sessio-rr3v.onrender.com';
 
 export default function AdminPage() {
   const [session, setSession] = useState(null);
